@@ -4,18 +4,19 @@ Java application that fetches item movement data from the Catapult API, processe
 
 ## Requirements
 
-- Java 11 or higher
+- Windows OS
+- OpenJDK Runtime Environment Temurin
 - Maven 3.6 or higher
 
 ## Building
 
-```bash
+```cmd
 cd nielsen-data-push
 mvn clean package
 ```
 
 This creates an executable JAR with all dependencies at:
-`target/nielsen-data-push-1.0.0.jar`
+`target\nielsen-data-push-1.0.0.jar`
 
 ## Usage
 
@@ -38,38 +39,53 @@ This creates an executable JAR with all dependencies at:
 
 \* Either `--startDate` and `--endDate` OR `--days` must be provided.
 
+### Date Range Behavior
+
+**Using `--startDate` and `--endDate`:**
+- Both dates are **fully inclusive**
+- Start date begins at 00:00:00 (midnight)
+- End date ends at 23:59:59 (end of day)
+- Example: `--startDate 2025-10-31 --endDate 2025-11-07` includes all data from Oct 31 through Nov 7
+
+**Using `--days`:**
+- Counts backward from **yesterday** (today is never included since it's incomplete)
+- Example: If today is 11/28 and you use `--days 7`:
+  - End date: 11/27 (yesterday)
+  - Start date: 11/21
+  - Result: 7 full days from 11/21 through 11/27
+
 ### Examples
 
 **Using specific date range:**
 
-```bash
-java -jar target/nielsen-data-push-1.0.0.jar \
-  --accountId 25ee1 \
-  --apiKey "YOUR_API_KEY" \
-  --store RS1 \
-  --nielsenName WAIANAE \
-  --startDate 2025-10-31 \
-  --endDate 2025-11-07 \
-  --sftpHost namft.nielseniq.com \
-  --sftpPort 46422 \
-  --sftpUser "Nielsen@nanukuli_WAM.com" \
-  --sftpPassword "YOUR_PASSWORD" \
+```cmd
+java -jar target\nielsen-data-push-1.0.0.jar ^
+  --accountId 25ee1 ^
+  --apiKey "YOUR_API_KEY" ^
+  --store RS1 ^
+  --nielsenName WAIANAE ^
+  --startDate 2025-10-31 ^
+  --endDate 2025-11-07 ^
+  --sftpHost namft.nielseniq.com ^
+  --sftpPort 46422 ^
+  --sftpUser "Nielsen@nanukuli_WAM.com" ^
+  --sftpPassword "YOUR_PASSWORD" ^
   --sftpPath Nielsen_wam0000
 ```
 
 **Using number of past days (last 7 days ending yesterday):**
 
-```bash
-java -jar target/nielsen-data-push-1.0.0.jar \
-  --accountId 25ee1 \
-  --apiKey "YOUR_API_KEY" \
-  --store RS1 \
-  --nielsenName WAIANAE \
-  --days 7 \
-  --sftpHost namft.nielseniq.com \
-  --sftpPort 46422 \
-  --sftpUser "Nielsen@nanukuli_WAM.com" \
-  --sftpPassword "YOUR_PASSWORD" \
+```cmd
+java -jar target\nielsen-data-push-1.0.0.jar ^
+  --accountId 25ee1 ^
+  --apiKey "YOUR_API_KEY" ^
+  --store RS1 ^
+  --nielsenName WAIANAE ^
+  --days 7 ^
+  --sftpHost namft.nielseniq.com ^
+  --sftpPort 46422 ^
+  --sftpUser "Nielsen@nanukuli_WAM.com" ^
+  --sftpPassword "YOUR_PASSWORD" ^
   --sftpPath Nielsen_wam0000
 ```
 
