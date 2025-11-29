@@ -5,7 +5,7 @@ Java application that fetches item movement data from the Catapult API, processe
 ## Requirements
 
 - Windows OS
-- OpenJDK Runtime Environment Temurin
+- Java 8 Temurin JRE
 - Maven 3.6 or higher
 
 ## Building
@@ -106,4 +106,17 @@ The processed CSV file is uploaded to the Nielsen SFTP server at:
 `{sftpPath}/{nielsenName}.csv`
 
 For example: `Nielsen_wam0000/WAIANAE.csv`
+
+### Sample Output
+
+See [Nielsen_Sample.csv](Nielsen_Sample.csv) for a complete example. Preview:
+
+```csv
+Item ID,Receipt Alias,Quantity,Sales
+073366129500,HAWAII CANDY FORTUNE COOKIE 3 OZ,3.00,$12.87
+073366202555,MID PAC 12 OZ BBQ SAUCE,8.00,$41.52
+073366212769,HULI HULI BBQ SAUCE 1 GAL,2.00,$65.98
+073366214053,HP SAUCE2.9Z,5.00,$8.95
+...
+```
 
